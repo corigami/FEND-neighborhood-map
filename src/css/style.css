@@ -25,10 +25,34 @@ td,
 th,
 p,
 img {
+    height: 100%;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
 img,
 fieldset {
     border: none;
+}
+#main {
+    width: 100%;
+}
+#menu_container {
+    background-color: grey;
+    float: left;
+    height: 100%;
+    width: 25%;
+}
+#menu_header {
+    background-color: lightgrey;
+    height: 10%;
+}
+#map_container {
+    background-color: darkslategray;
+    float: right;
+    width: 75%;
+}
+#map_header {
+    background-color: lightslategray;
+    height: 10%;
 }
