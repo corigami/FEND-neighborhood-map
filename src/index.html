@@ -17,15 +17,13 @@
             </div>
             <div id='menu_content' data-bind="foreach: menuList">
                 <div class="menu_item" data-bind="menuItem">
-                    <h3 data-bind="text: name"></h3>
-                    <p data-bind="text: address"> </p>
-                    <p data-bind="text: city"></p>
+                    <p data-bind="text: name"></p>
                 </div>
             </div>
         </nav>
         <div id='map_container'>
             <div id='map_header'>
-                <a id="menu" class="header__menu">
+                <a id="menu" class="header_menu">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />
                     </svg>
@@ -49,24 +47,11 @@
             zoom: 12
         });
     }
-</script>
-<script>
-    /*
-     * Open the drawer when the menu ison is clicked.
-     */
-    var menu = document.querySelector('#menu');
-    var main = document.querySelector('#map_container');
-    var drawer = document.querySelector('.nav');
 
-    menu.addEventListener('click', function (e) {
-        drawer.classList.toggle('open');
-        e.stopPropagation();
-    });
-    main.addEventListener('click', function () {
-        drawer.classList.remove('open');
-    });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs&callback=initMap">
+
+
 </script>
 
 </html>

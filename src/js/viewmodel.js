@@ -13,6 +13,22 @@ app.ViewModel = function () {
     app.model.getAllLocations().forEach(function (loc) {
         self.menuList.push(new MenuItem(loc));
     });
+
+    /*
+     * Open the drawer when the menu icon is clicked.
+     */
+    var $menu = $('#menu');
+    var $main = $('#map_container');
+    var $drawer = $('.nav');
+
+    $menu.click(function (e) {
+        console.log("clicked");
+        $drawer.toggleClass('open', true);
+        e.stopPropagation();
+    });
+    $main.click(function () {
+        $drawer.removeClass('open');
+    });
 };
 
 //bind the view to our ViewModel

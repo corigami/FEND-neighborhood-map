@@ -28,18 +28,15 @@ img {
     margin: 0;
     padding: 0;
 }
-
 img,
 fieldset {
     border: none;
 }
-
 html,
 body {
     height: 100%;
     width: 100%;
 }
-
 .nav {
     z-index: 10;
     background-color: #fff;
@@ -52,58 +49,48 @@ body {
     /* Optionally, we animate the drawer. */
     transition: transform .5s ease;
 }
-
 .nav.open {
     -webkit-transform: translate(300px, 0);
     transform: translate(300px, 0);
 }
-
-.header__menu {
+.header_menu {
     display: inline-block;
     position: absolute;
     left: 0;
     padding: 1em;
 }
-
-.header__menu svg {
-    width: 32px;
+.header_menu svg {
+    width: 36px;
     fill: #E0E0E0;
 }
-
 #main {
     height: 100%;
     width: 100%;
 }
-
 #menu_container {
     background-color: grey;
-    float: left;
+    color: lightgray;
 }
-
 #menu_header {
     background-color: lightgrey;
-    height: 10%;
+    height: 20%;
 }
-
 #menu_content {
-    background-color: orange;
+    background-color: black;
 }
-
-#menu_item {
-    background-color: orange;
-    height: 10%;
+.menu_item {
+    background-color: black;
+    height: 20%;
+    padding: 20px;
 }
-
 #map_container {
     background-color: darkslategray;
     height: 100%;
 }
-
 #map_header {
     background-color: lightslategray;
     height: 10%;
 }
-
 #map_content {
     background-color: lightslategray;
     height: 90%;
