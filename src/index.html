@@ -35,21 +35,8 @@
 </body>
 <script type="text/javascript" src="js/model.js"></script>
 <script type="text/javascript" src="js/viewmodel.js"></script>
-<script type="text/javascript">
-    var map;
 
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map_content'), {
-            center: {
-                lat: 39.764093,
-                lng: -84.187295
-            },
-            zoom: 12
-        });
-    }
-
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs&callback=initMap">
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs">
 
 
 </script>
