@@ -13,11 +13,7 @@ app.ViewModel = function () {
     app.model.getAllLocations().forEach(function (loc) {
         self.menuList.push(new MenuItem(loc));
     });
-
-    this.testFunc("test");
 };
 
-
-
-
+//bind the view to our ViewModel
 ko.applyBindings(new app.ViewModel());

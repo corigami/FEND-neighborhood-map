@@ -2,12 +2,29 @@ var app = app || {};
 app.model = {
     locations: [
         {
-            city: 'test 1',
-            address: '123 Bob St.'
+            name: 'National Museum of the U.S. Air Force',
+            address: '1100 Spaatz St',
+            city: 'Wright-Patterson AFB'
     },
         {
-            city: 'test 2',
-            address: '456 Dave Rd.'
+            name: 'The Wright Cycle Company Complex',
+            address: '16 South Williams Street',
+            city: 'Dayton'
+    },
+        {
+            name: 'Dayton Art Institute',
+            address: '456 Belmonte Park North',
+            city: 'Dayton'
+    },
+        {
+            name: '2nd Street Market',
+            address: '600 E Second St',
+            city: 'Dayton'
+    },
+        {
+            name: 'Wegerzyn Gardens MetroPark',
+            address: '1301 E. Siebenthaler Avenue',
+            city: 'Dayton'
     }
         ],
     init: function () {
@@ -19,6 +36,7 @@ app.model = {
 };
 
 var MenuItem = function (data) {
+    this.name = ko.observable(data.name);
     this.city = ko.observable(data.city);
     this.address = ko.observable(data.address);
 }
