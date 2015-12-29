@@ -34,3 +34,9 @@ app.model = {
         return app.model.locations;
     },
 };
+
+var MenuItem = function (data) {
+    this.name = ko.observable(data.name);
+    this.city = ko.observable(data.city);
+    this.address = ko.observable(data.address);
+}
