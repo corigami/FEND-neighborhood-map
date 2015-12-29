@@ -6,7 +6,9 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs">
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs">
+
+
     </script>
     <meta name="viewport" content="width=device-width">
 </head>
@@ -18,7 +20,7 @@
                 This is the menu header
             </div>
             <div id='menu_content' data-bind="foreach: menuList">
-                <div class="menu_item" data-bind="menuItem, click: onClick">
+                <div class="menu_item" data-bind="LocItem, click: menuClick">
                     <p data-bind="text: name"></p>
                 </div>
             </div>
@@ -36,6 +38,7 @@
     </div>
 </body>
 <script type="text/javascript" src="js/model.js"></script>
+<script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/viewmodel.js"></script>
 
 
