@@ -7,8 +7,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs">
-
-
     </script>
     <meta name="viewport" content="width=device-width">
 </head>
@@ -16,8 +14,10 @@
 <body>
     <div id='main'>
         <nav id='menu_container' class="nav">
-            <div id='menu_header'>
-                This is the menu header
+            <div id='menu_filter'>
+                <p>Location Filter</p>
+                <input id='filter-textbox' type="input" data-bind="textInput: filterString" />
+                <button id='filter-button' data-bind="click: filterClick">Filter</button>
             </div>
             <div id='menu_content' data-bind="foreach: menuList">
                 <div class="menu_item" data-bind="LocItem, click: menuClick">

@@ -2,9 +2,11 @@ var app = app || {};
 
 ViewModel = function () {
     var self = this;
+    this.filterString = ko.observable("");
     this.infoWindow = '';
     this.menuList = ko.observableArray();
     this.contentStr = '';
+
 
     app.model.getAllLocations().forEach(function (loc) {
         self.menuList.push(new LocItem(loc));
@@ -51,7 +53,19 @@ ViewModel = function () {
     self.hidePin = function () {
         self.currentLocation().bounceOff();
         self.infoWindow.close();
+    };
+
+    self.filterClick = function () {
+        console.log(self.filterString());
     }
+
+    $("#filter-textbox").keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#filter-button").click();
+        }
+    });
+
+
 };
 
 
