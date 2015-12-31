@@ -2,20 +2,23 @@ var app = app || {};
 
 ViewModel = function () {
     var self = this;
-    this.infoWindow = '';
-    this.menuList = ko.observableArray();
-    this.contentStr = '';
-
-    app.model.getAllLocations().forEach(function (loc) {
-        self.menuList.push(new LocItem(loc));
+    self.filterString = ko.observable();
+    self.infoWindow = '';
+    self.locations = ko.observableArray();
+    self.contentStr = ko.observable();
+    app.Model.getAllLocations().forEach(function (loc) {
+        self.locations.push(new LocItem(loc));
     });
 
-    window.addEventListener('load', app.map.initMap(self.menuList()));
+    self.locations().forEach(function (loc) {
+        app.Model.getWikiData(loc);
+    });
 
-    this.infoWindow = app.map.createInfoWindow(this.menuList()[0]);
-    this.currentLocation = ko.observable(this.menuList()[0]);
-    this.contentStr = ko.computed(function () {
-        return '<div id="markerName"><em>' + this.currentLocation().name + '</em></div>';
+    self.currentLocation = ko.observable('');
+    self.contentStr = ko.computed(function () {
+        return '<div id="infoWindowContent"><div><strong>' + this.currentLocation().name +
+            '</strong></div><div id="markerLoc">' +
+            this.currentLocation().address + '</div></div></div>';
     }, this);
 
 
@@ -35,50 +38,70 @@ ViewModel = function () {
     });
 
     menuClick = function () {
-        self.currentLocation().bounceOff();
-        self.currentLocation(this);
-
-        self.showPin()
+        self.showPin(this)
     };
 
-    self.showPin = function () {
-        self.infoWindow.setContent(this.contentStr());
-        self.currentLocation().bounceOn();
-        // self.infoWindow.setContent(self.currentLocation.pinContent);
+
+    self.showPin = function (loc) {
+        if (self.currentLocation())
+            self.pinBounceOff(self.currentLocation().pin);
+        self.currentLocation(loc);
+
+        if (!self.infoWindow)
+            self.createWindow();
+        self.infoWindow.setContent($('#infoWindowContent').html());
+        self.pinBounceOn(self.currentLocation().pin);
         self.infoWindow.open(self.currentLocation().pin.map, self.currentLocation().pin);
     };
 
     self.hidePin = function () {
-        self.currentLocation().bounceOff();
+        if (self.currentLocation())
+            self.pinBounceOff(self.currentLocation().pin);
+        if (self.infoWindow);
         self.infoWindow.close();
+    };
+
+
+    self.filterLocations = ko.computed(function () {
+        if (!self.filterString()) {
+            self.locations().forEach(function (loc) {
+                if (loc.pin) //only run if pin has been created
+                    loc.pin.setVisible(true);
+            });
+            return self.locations();
+        } else {
+            return ko.utils.arrayFilter(self.locations(), function (loc) {
+                if (loc.name.toLowerCase().search(self.filterString().toLowerCase()) >= 0) {
+                    if (loc.pin)
+                        loc.pin.setVisible(true);
+                    return true;
+                } else {
+                    if (loc.pin)
+                        loc.pin.setVisible(false)
+                    if (self.currentLocation() == loc)
+                        self.hidePin();
+                    return false;
+                }
+            });
+        }
+    });
+
+    self.pinBounceOn = function (pin) {
+        pin.setAnimation(google.maps.Animation.BOUNCE);
     }
+    self.pinBounceOff = function (pin) {
+        pin.setAnimation(null);
+    }
+
+    self.createWindow = function () {
+        self.infoWindow = app.map.createInfoWindow(self.currentLocation());
+    }
+
+    window.addEventListener('load', app.map.initMap(self.locations()));
+
 };
 
-
-var LocItem = function (data) {
-    var self = this;
-    this.name = data.name;
-    this.city = data.city;
-    this.address = data.address;
-    this.queryString = ko.computed(function () {
-        return this.address + ', ' + this.city + ', USA';
-    }, this);
-    this.visable = ko.observable(true);
-    this.pin = '';
-
-    this.gCallback = function (results, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            self.pin = createMarker(results[0], self);
-        }
-    };
-    this.bounceOn = function () {
-        self.pin.setAnimation(google.maps.Animation.BOUNCE);
-    }
-    this.bounceOff = function () {
-        self.pin.setAnimation(null);
-    }
-}
-
+app.Model = new Model();
 app.map = new MapHelper();
 app.viewModel = new ViewModel();
 //bind the view to our ViewModel

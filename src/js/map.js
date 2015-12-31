@@ -14,7 +14,6 @@ MapHelper = function () {
             },
             zoom: 12
         });
-
         // Sets the boundaries of the map based on pin locations
         window.mapBounds = new google.maps.LatLngBounds();
         self.placePins(locations);
@@ -87,9 +86,7 @@ MapHelper = function () {
             });
 
         google.maps.event.addListener(marker, 'click', function () {
-            app.viewModel.currentLocation().bounceOff();
-            app.viewModel.currentLocation(locItem);
-            app.viewModel.showPin();
+            app.viewModel.showPin(locItem);
 
         });
         google.maps.event.addListener(map, 'click', function () {
@@ -107,7 +104,7 @@ MapHelper = function () {
 
     self.createInfoWindow = function (currentLoc) {
         var window = new google.maps.InfoWindow({
-            content: ""
+            content: ''
         })
         return window;
     };
