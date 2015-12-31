@@ -40,25 +40,8 @@ body {
     width: 100%;
 }
 
-.nav {
-    z-index: 10;
-    background-color: #fff;
-    width: 300px;
-    position: absolute;
-    left: -300px;
-    /* This trasform moves the drawer off canvas. */
-    -webkit-transform: translate(0px, 0px);
-    transform: translate(-0px, 0px);
-    /* Optionally, we animate the drawer. */
-    transition: transform .5s ease;
-}
-
-.nav.open {
-    -webkit-transform: translate(300px, 0);
-    transform: translate(300px, 0);
-}
-
 .header_menu {
+    visibility: hidden;
     display: inline-block;
     position: absolute;
     left: 0;
@@ -76,28 +59,32 @@ body {
 }
 
 #menu_container {
-    background-color: grey;
+    height: 100%;
+    width: 300px;
+    float: left;
+    background-color: black;
     color: lightgray;
 }
 
 #menu_filter {
-    background-color: lightgrey;
-    height: 20%;
-    padding: 10px;
+    height: 6em;
+}
+
+#filter-textbox {
+    margin: 5px;
+    height: 2em;
+    width: 15em;
 }
 
 #filter-button {
-    height: 1.5em;
-    width: 5em;
+    margin: 5px;
+    height: 2em;
+    width: 10em;
 }
 
-#menu_content {
-    background-color: black;
-}
+#menu_content {}
 
 .menu_item {
-    background-color: black;
-    height: 20%;
     padding: 20px;
 }
 
@@ -115,3 +102,9 @@ body {
     background-color: lightslategray;
     height: 90%;
 }
+
+#infoWindow {}
+
+#markerName {}
+
+#markerLoc {}

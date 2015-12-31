@@ -17,9 +17,9 @@
             <div id='menu_filter'>
                 <p>Location Filter</p>
                 <input id='filter-textbox' type="input" data-bind="textInput: filterString" />
-                <button id='filter-button' data-bind="click: filterClick">Filter</button>
+
             </div>
-            <div id='menu_content' data-bind="foreach: menuList">
+            <div id='menu_content' data-bind="foreach: filterLocations">
                 <div class="menu_item" data-bind="LocItem, click: menuClick">
                     <p data-bind="text: name"></p>
                 </div>

@@ -1,6 +1,7 @@
 var app = app || {};
-app.model = {
-    locations: [
+Model = function () {
+    var self = this;
+    self.locations = [
         {
             name: 'National Museum of the U.S. Air Force',
             address: '1100 Spaatz St',
@@ -26,11 +27,9 @@ app.model = {
             address: '1301 E. Siebenthaler Avenue',
             city: 'Dayton'
     }
-        ],
-    init: function () {
+            ];
 
-    },
-    getAllLocations: function () {
-        return app.model.locations;
-    },
+    self.getAllLocations = function () {
+        return self.locations;
+    };
 };
