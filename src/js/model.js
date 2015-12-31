@@ -32,4 +32,45 @@ Model = function () {
     self.getAllLocations = function () {
         return self.locations;
     };
+
+    self.getWikiData = function (loc) {
+        var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + loc.name + '&format=json&callback=wikiCallback';
+
+        $.ajax({
+            url: wikiUrl,
+            dataType: "jsonp",
+            success: function (response) {
+                var articleList = response[1];
+
+                for (var i = 0; i < articleList.length; i++) {
+                    articleStr = articleList[i];
+                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                    loc.wikiInfo.push(articleStr);
+                };
+
+                clearTimeout(self.wikiRequestTimeout);
+            }
+        });
+    }
+    self.wikiRequestTimeout = setTimeout(function () {
+        $wikiElem.text("failed to get wikipedia resources");
+    }, 8000);
+};
+
+var LocItem = function (data) {
+    var self = this;
+    self.name = data.name;
+    self.city = data.city;
+    self.address = data.address;
+    self.queryString = ko.computed(function () {
+        return this.address + ', ' + this.city + ', USA';
+    }, this);
+    self.pin = '';
+    self.gCallback = function (results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            self.pin = createMarker(results[0], self);
+        }
+    };
+    self.wikiInfo = ko.observableArray();
+
 };

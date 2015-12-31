@@ -6,8 +6,7 @@
     <link href="css/style.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs">
-    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs"></script>
     <meta name="viewport" content="width=device-width">
 </head>
 
@@ -17,7 +16,6 @@
             <div id='menu_filter'>
                 <p>Location Filter</p>
                 <input id='filter-textbox' type="input" data-bind="textInput: filterString" />
-
             </div>
             <div id='menu_content' data-bind="foreach: filterLocations">
                 <div class="menu_item" data-bind="LocItem, click: menuClick">
@@ -33,6 +31,10 @@
                     </svg>
                 </a>
             </div>
+            <div id="info-window-container" style="display:none;">
+                <div id="window-content" data-bind="html:contentStr">
+                </div>
+            </div>
             <div id='map_content'></div>
         </div>
     </div>
@@ -41,6 +43,4 @@
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/viewmodel.js"></script>
 
-
-
-</html>
+< /html>
