@@ -14,10 +14,10 @@
     <div id='main'>
         <nav id='menu_container' class="nav">
             <div id='menu_filter'>
-                <p>Location Filter</p>
+                <p align="center">Location Filter</p>
                 <input id='filter-textbox' type="input" data-bind="textInput: filterString" />
             </div>
-            <div id='menu_content' data-bind="foreach: filterLocations">
+            <div id='menu_content' data-bind="foreach: filterLocations().sort(function (l, r) { return l.name > r.name ? 1 : -1 })">
                 <div class="menu_item" data-bind="LocItem, click: menuClick">
                     <p data-bind="text: name"></p>
                 </div>
@@ -25,15 +25,15 @@
         </nav>
         <div id='map_container'>
             <div id='map_header'>
+                <h1>Points of Interest in Dayton</h1>
                 <a id="menu" class="header_menu">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />
                     </svg>
                 </a>
             </div>
-            <div id="info-window-container" style="display:none;">
-                <div id="window-content" data-bind="html:contentStr">
-                </div>
+            <div id="info-window-container" style="display:none">
+                <div id="window-content" data-bind="html:contentStr"></div>
             </div>
             <div id='map_content'></div>
         </div>
@@ -42,5 +42,3 @@
 <script type="text/javascript" src="js/model.js"></script>
 <script type="text/javascript" src="js/map.js"></script>
 <script type="text/javascript" src="js/viewmodel.js"></script>
-
-< /html>

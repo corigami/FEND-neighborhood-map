@@ -2,25 +2,42 @@ var app = app || {};
 
 ViewModel = function () {
     var self = this;
-    self.filterString = ko.observable();
     self.infoWindow = '';
+    self.filterString = ko.observable();
     self.locations = ko.observableArray();
-    self.contentStr = ko.observable();
     app.Model.getAllLocations().forEach(function (loc) {
         self.locations.push(new LocItem(loc));
     });
 
     self.locations().forEach(function (loc) {
         app.Model.getWikiData(loc);
+
     });
 
     self.currentLocation = ko.observable('');
-    self.contentStr = ko.computed(function () {
-        return '<div id="infoWindowContent"><div><strong>' + this.currentLocation().name +
-            '</strong></div><div id="markerLoc">' +
-            this.currentLocation().address + '</div></div></div>';
-    }, this);
 
+    self.getWikiString = function () {
+        if (this.currentLocation().wikiInfo) {
+            if (app.Model.getWikiStatus() == 'down') {
+                this.currentLocation().wikiInfo("Wikipedia Unavailable");
+            } else if (this.currentLocation().wikiInfo() == '') {
+                this.currentLocation().wikiInfo("No Wikipedia information available");
+            }
+
+            return this.currentLocation().wikiInfo();
+        }
+
+    };
+
+    self.contentStr = ko.computed(function () {
+        return '<div id="infoWindowContent">' +
+            '<div><strong>' + this.currentLocation().name + '</strong></div>' +
+            '<div id="markerLoc">' + this.currentLocation().address + '<hr></div>' +
+            '<p>Wikipedia Description: </p>' +
+            '<p><em>' + self.getWikiString() + '</em></p>' +
+            '</div>';
+
+    }, this);
 
     //Open the drawer when the menu icon is clicked.
     var $menu = $('#menu');
@@ -37,8 +54,9 @@ ViewModel = function () {
         $drawer.removeClass('open');
     });
 
-    menuClick = function () {
+    menuClick = function (data, event) {
         self.showPin(this)
+
     };
 
 

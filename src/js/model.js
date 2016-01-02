@@ -1,16 +1,12 @@
 var app = app || {};
 Model = function () {
     var self = this;
+    self.wikiStatus = 'up';
     self.locations = [
         {
             name: 'National Museum of the U.S. Air Force',
             address: '1100 Spaatz St',
             city: 'Wright-Patterson AFB'
-    },
-        {
-            name: 'The Wright Cycle Company Complex',
-            address: '16 South Williams Street',
-            city: 'Dayton'
     },
         {
             name: 'Dayton Art Institute',
@@ -26,7 +22,12 @@ Model = function () {
             name: 'Wegerzyn Gardens MetroPark',
             address: '1301 E. Siebenthaler Avenue',
             city: 'Dayton'
-    }
+    },
+        {
+            name: "Dayton Aviation Heritage National Historical Park",
+            address: '16 South Williams Street',
+            city: 'Dayton'
+        }
             ];
 
     self.getAllLocations = function () {
@@ -34,27 +35,28 @@ Model = function () {
     };
 
     self.getWikiData = function (loc) {
+        loc.wikiStatus = 'pending';
+        loc.wikiInfo('Wikipedia information pending...')
         var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + loc.name + '&format=json&callback=wikiCallback';
 
         $.ajax({
             url: wikiUrl,
             dataType: "jsonp",
             success: function (response) {
-                var articleList = response[1];
-
-                for (var i = 0; i < articleList.length; i++) {
-                    articleStr = articleList[i];
-                    var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-                    loc.wikiInfo.push(articleStr);
-                };
-
+                loc.wikiStatus = 'up';
+                loc.wikiInfo(response[2]);
                 clearTimeout(self.wikiRequestTimeout);
             }
         });
     }
     self.wikiRequestTimeout = setTimeout(function () {
-        $wikiElem.text("failed to get wikipedia resources");
+        self.wikiStatus = 'down';
     }, 8000);
+
+    self.getWikiStatus = function () {
+        return self.wikiStatus;
+    }
+
 };
 
 var LocItem = function (data) {
@@ -71,6 +73,7 @@ var LocItem = function (data) {
             self.pin = createMarker(results[0], self);
         }
     };
-    self.wikiInfo = ko.observableArray();
+    self.wikiStatus = 'down';
+    self.wikiInfo = ko.observable('');
 
 };

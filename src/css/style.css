@@ -67,13 +67,14 @@ body {
 }
 
 #menu_filter {
-    height: 6em;
+    height: 5em;
+    margin: 5px;
 }
 
 #filter-textbox {
-    margin: 5px;
+    margin: auto;
     height: 2em;
-    width: 15em;
+    width: 90%;
 }
 
 #filter-button {
@@ -82,10 +83,12 @@ body {
     width: 10em;
 }
 
-#menu_content {}
-
 .menu_item {
     padding: 20px;
+}
+
+.selected {
+    background-color: yellow;
 }
 
 #map_container {
@@ -100,7 +103,7 @@ body {
 
 #map_content {
     background-color: lightslategray;
-    height: 90%;
+    height: 90%
 }
 
 #infoWindow {}
