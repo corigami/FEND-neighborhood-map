@@ -6,9 +6,12 @@
     <link rel="stylesheet" type="text/css" href="css/common.css" />
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 601px)" href="css/style.css" />
     <link rel="stylesheet" type="text/css" media="screen and (max-width: 600px)" href="/css/responsive.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+
+    <script src="js/lib/jquery-1.11.3.js"></script>
+
     <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs&callback=loadMap"></script>
     <meta name="viewport" content="width=device-width">
 </head>
 
@@ -27,7 +30,8 @@
         </nav>
         <div id='map_container'>
             <div id='map_header'>
-                <h1>Points of Interest in Dayton</h1>
+                <h1 id="header_text">Points of Interest in Dayton</h1>
+                <h2 id="header_status">Please Wait while Google Loads</h2>
                 <a id="menu" class="header_menu">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />

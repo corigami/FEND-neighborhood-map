@@ -20,17 +20,18 @@ MapHelper = function () {
         // Sets the boundaries of the map based on pin locations
         window.mapBounds = new google.maps.LatLngBounds();
         self.service = new google.maps.places.PlacesService(self.map);
-        self.placePins(locations);
 
         google.maps.event.addDomListener(window, 'resize', function () {
             self.map.fitBounds(window.mapBounds);
             self.map.setCenter(window.mapBounds.getCenter());
         });
-
+        self.placePins(locations);
 
     };
 
+    //for future use
     self.getPlaces = function () {
+        self.service = new google.maps.places.PlacesService(self.map);
         self.service.nearbySearch({
             location: {
                 lat: 39.764093,
@@ -42,40 +43,18 @@ MapHelper = function () {
     };
 
     self.receivePlaces = function (results, status) {
-        console.log("here");
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {}
-            console.log(results[0]);
+            for (var i = 0; i < results.length; i++) {
+                var item = results[i];
+                //console.log(item.name);
+                self.viewLocations.push(new LocItem({
+                    name: item.name,
+                    address: item.vicinity
+                }))
+            }
         }
     };
 
-
-
-
-
-    /*
-    getPins(locations) takes in the array of locations created by locationFinder()
-    and fires off Google place searches for each location
-    getPins = function (locations) {
-
-
-        // creates a Google place search service object. PlacesService does the work of
-        // actually searching for location data.
-
-
-        // Iterates through the array of locations, creates a search object for each location
-        locations.forEach(function (place) {
-
-            // the search request object
-            var request = {
-                query: place
-            };
-
-            // Actually searches the Google Maps API for location data and runs the callback
-            // function with the search results after each search.
-            self.service.textSearch(request, place.callback);
-        });
-    };
 
     /*
     pinPoster(locations) takes in the array of locations created by locationFinder()
@@ -91,6 +70,7 @@ MapHelper = function () {
             // the search request object
             var request = {
                 query: place.queryString()
+
             };
 
             // Actually searches the Google Maps API for location data and runs the callback
@@ -116,7 +96,8 @@ MapHelper = function () {
             marker = new google.maps.Marker({
                 map: self.map,
                 position: placeData.geometry.location,
-                title: name
+                title: name,
+                icon: locItem.pinImage
             });
 
         google.maps.event.addListener(marker, 'click', function () {
@@ -124,7 +105,7 @@ MapHelper = function () {
 
         });
         google.maps.event.addListener(self.map, 'click', function () {
-            app.viewModel.hidePin();
+            //  app.viewModel.hidePin();
 
         });
 

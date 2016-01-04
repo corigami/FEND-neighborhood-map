@@ -5,7 +5,6 @@ ViewModel = function () {
     var $menu = $('#menu');
     var $main = $('#map_container');
     var $drawer = $('.nav');
-
     self.map = new MapHelper();
     self.model = new Model();
     self.infoWindow = '';
@@ -49,7 +48,7 @@ ViewModel = function () {
     self.showPin = function (loc) {
         if (self.currentLocation()) {
             self.pinBounceOff(self.currentLocation().pin);
-            self.currentLocation().pin.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+            self.currentLocation().pin.setIcon(loc.pinImage);
         }
         self.currentLocation(loc);
 
@@ -122,8 +121,19 @@ ViewModel = function () {
 
     };
 
-    window.addEventListener('load', self.map.initMap(self.locations()));
-    self.map.getPlaces();
+    //window.addEventListener('load', self.map.initMap(self.locations()));
+    //  self.map.getPlaces();
+
+    self.googleTimeout = setTimeout(function () {
+        $('#header_status').text("Google Failed To load");
+    }, 5000);
+
+    window.loadMap = function () {
+        self.map.initMap(self.locations());
+        clearTimeout(self.googleTimeout);
+        $('#header_status').text("");
+
+    }
 };
 
 

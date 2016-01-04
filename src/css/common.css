@@ -81,3 +81,8 @@ body {
     background-color: lightslategray;
     height: 90%;
 }
+
+#infoWindowContent {
+    max-width=100px;
+    background-color: red
+}
