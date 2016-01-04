@@ -29,11 +29,6 @@ img {
     padding: 0;
 }
 
-img,
-fieldset {
-    border: none;
-}
-
 html,
 body {
     height: 100%;
@@ -62,7 +57,7 @@ body {
     display: inline-block;
     position: absolute;
     left: 0;
-    padding: 1em;
+    padding: 5px;
 }
 
 .header_menu svg {
@@ -76,29 +71,30 @@ body {
 }
 
 #menu_container {
-    background-color: grey;
+    height: 100%;
+    width: 300px;
+    float: left;
+    background-color: black;
     color: lightgray;
 }
 
 #menu_filter {
-    background-color: lightgrey;
-    height: 20%;
-    padding: 10px;
+    height: 5em;
+    margin: 5px;
 }
 
-#filter-button {
-    height: 1.5em;
-    width: 5em;
-}
-
-#menu_content {
-    background-color: black;
+#filter-textbox {
+    margin: auto;
+    height: 2em;
+    width: 90%;
 }
 
 .menu_item {
-    background-color: black;
-    height: 20%;
     padding: 20px;
+}
+
+.selected {
+    background-color: yellow;
 }
 
 #map_container {
@@ -113,5 +109,11 @@ body {
 
 #map_content {
     background-color: lightslategray;
-    height: 90%;
+    height: 90%
 }
+
+#infoWindow {}
+
+#markerName {}
+
+#markerLoc {}

@@ -1,0 +1,83 @@
+/* null margins and padding to give good cross-browser baseline */
+
+html,
+body,
+address,
+blockquote,
+div,
+form,
+fieldset,
+caption,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+ul,
+li,
+ol,
+ul,
+table,
+tr,
+td,
+th,
+p,
+img {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+#main {
+    height: 100%;
+    width: 100%;
+}
+
+#menu_filter {
+    height: 5em;
+    margin: 5px;
+}
+
+#filter_label {
+    margin: 5px;
+}
+
+#filter-textbox {
+    margin: auto;
+    width: 280px;
+    height: 2em;
+}
+
+.menu_item {
+    padding: 20px;
+}
+
+.menu_item:hover {
+    background-color: darkmagenta;
+}
+
+.selected {
+    background-color: darkmagenta;
+}
+
+#map_container {
+    background-color: darkslategray;
+    height: 100%;
+}
+
+#map_header {
+    background-color: lightslategray;
+    height: 10%;
+}
+
+#map_content {
+    background-color: lightslategray;
+    height: 90%;
+}

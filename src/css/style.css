@@ -1,51 +1,11 @@
 /* null margins and padding to give good cross-browser baseline */
 
-html,
-body,
-address,
-blockquote,
-div,
-form,
-fieldset,
-caption,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-ul,
-li,
-ol,
-ul,
-table,
-tr,
-td,
-th,
-p,
-img {
-    margin: 0;
-    padding: 0;
-}
-
-img,
-fieldset {
-    border: none;
-}
-
-html,
-body {
-    height: 100%;
-    width: 100%;
-}
-
 .header_menu {
     visibility: hidden;
     display: inline-block;
     position: absolute;
     left: 0;
-    padding: 1em;
+    padding: 5px;
 }
 
 .header_menu svg {
@@ -65,49 +25,3 @@ body {
     background-color: black;
     color: lightgray;
 }
-
-#menu_filter {
-    height: 5em;
-    margin: 5px;
-}
-
-#filter-textbox {
-    margin: auto;
-    height: 2em;
-    width: 90%;
-}
-
-#filter-button {
-    margin: 5px;
-    height: 2em;
-    width: 10em;
-}
-
-.menu_item {
-    padding: 20px;
-}
-
-.selected {
-    background-color: yellow;
-}
-
-#map_container {
-    background-color: darkslategray;
-    height: 100%;
-}
-
-#map_header {
-    background-color: lightslategray;
-    height: 10%;
-}
-
-#map_content {
-    background-color: lightslategray;
-    height: 90%
-}
-
-#infoWindow {}
-
-#markerName {}
-
-#markerLoc {}

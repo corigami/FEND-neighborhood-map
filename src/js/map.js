@@ -21,6 +21,13 @@ MapHelper = function () {
         window.mapBounds = new google.maps.LatLngBounds();
         self.service = new google.maps.places.PlacesService(self.map);
         self.placePins(locations);
+
+        google.maps.event.addDomListener(window, 'resize', function () {
+            self.map.fitBounds(window.mapBounds);
+            self.map.setCenter(window.mapBounds.getCenter());
+        });
+
+
     };
 
     self.getPlaces = function () {

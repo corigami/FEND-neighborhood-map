@@ -47,12 +47,15 @@ ViewModel = function () {
 
 
     self.showPin = function (loc) {
-        if (self.currentLocation())
+        if (self.currentLocation()) {
             self.pinBounceOff(self.currentLocation().pin);
+            self.currentLocation().pin.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+        }
         self.currentLocation(loc);
 
         if (!self.infoWindow)
             self.createWindow();
+        self.currentLocation().pin.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
         self.infoWindow.setContent($('#infoWindowContent').html());
         self.pinBounceOn(self.currentLocation().pin);
         self.infoWindow.open(self.currentLocation().pin.map, self.currentLocation().pin);
@@ -91,6 +94,9 @@ ViewModel = function () {
 
     self.pinBounceOn = function (pin) {
         pin.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function () {
+            self.pinBounceOff(pin);
+        }, 3000);
     }
     self.pinBounceOff = function (pin) {
         pin.setAnimation(null);
@@ -111,7 +117,8 @@ ViewModel = function () {
     });
 
     menuClick = function (data, event) {
-        self.showPin(this)
+        $drawer.removeClass('open');
+        self.showPin(this);
 
     };
 
