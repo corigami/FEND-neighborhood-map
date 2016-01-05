@@ -131,11 +131,13 @@ ViewModel = function () {
         self.map.initMap(self.locations());
         clearTimeout(self.googleTimeout);
         $('#header_status').text("");
+    };
 
-    }
-};
+    window.onresize = function () {
+        $nav.removeClass('open');
+    };
 
-
+}
 app.viewModel = new ViewModel();
 //bind the view to our ViewModel
 ko.applyBindings(app.viewModel);

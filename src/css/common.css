@@ -32,9 +32,8 @@ body {
 }
 
 #title_container {
-    align-self: center;
+    width: 100%;
     text-align: center;
-    margin-left: 75px;
     padding: 1em;
 }
 

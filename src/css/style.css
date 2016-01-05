@@ -9,6 +9,7 @@
 #menu_container {
     position: relative;
     float: left;
+    left: 0px;
     height: 100%;
     width: 300px;
     background-color: black;
