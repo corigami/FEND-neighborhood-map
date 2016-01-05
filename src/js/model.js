@@ -4,29 +4,24 @@ Model = function () {
     self.wikiStatus = 'up';
     self.locations = [
         {
-            name: 'National Museum of the U.S. Air Force',
-            address: '1100 Spaatz St',
-            city: 'Wright-Patterson AFB'
+            name: 'National Museum of the United States Air Force',
+            address: '1100 Spaatz St, Wright-Patterson AFB'
     },
         {
             name: 'Dayton Art Institute',
-            address: '456 Belmonte Park North',
-            city: 'Dayton'
+            address: '456 Belmonte Park North, Dayton'
     },
         {
             name: '2nd Street Market',
-            address: '600 E Second St',
-            city: 'Dayton'
+            address: '600 E Second St , Dayton'
     },
         {
             name: 'Wegerzyn Gardens MetroPark',
-            address: '1301 E. Siebenthaler Avenue',
-            city: 'Dayton'
+            address: '1301 E. Siebenthaler Avenue, Dayton'
     },
         {
             name: "Dayton Aviation Heritage National Historical Park",
-            address: '16 South Williams Street',
-            city: 'Dayton'
+            address: '16 South Williams Street, Dayton'
         }
             ];
 
@@ -62,10 +57,9 @@ Model = function () {
 var LocItem = function (data) {
     var self = this;
     self.name = data.name;
-    self.city = data.city;
     self.address = data.address;
     self.queryString = ko.computed(function () {
-        return this.address + ', ' + this.city + ', USA';
+        return this.address + ', USA';
     }, this);
     self.pin = '';
     self.gCallback = function (results, status) {
@@ -75,5 +69,6 @@ var LocItem = function (data) {
     };
     self.wikiStatus = 'down';
     self.wikiInfo = ko.observable('');
+    self.pinImage = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
 
 };

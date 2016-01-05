@@ -2,23 +2,28 @@ var app = app || {};
 
 ViewModel = function () {
     var self = this;
+    var $menuButton = $('#menu_button');
+    var $main = $('#map_container');
+    var $drawer = $('.nav');
+    self.map = new MapHelper();
+    self.model = new Model();
     self.infoWindow = '';
     self.filterString = ko.observable();
+    self.currentLocation = ko.observable('');
     self.locations = ko.observableArray();
-    app.Model.getAllLocations().forEach(function (loc) {
+
+    self.model.getAllLocations().forEach(function (loc) {
         self.locations.push(new LocItem(loc));
     });
 
     self.locations().forEach(function (loc) {
-        app.Model.getWikiData(loc);
+        self.model.getWikiData(loc);
 
     });
 
-    self.currentLocation = ko.observable('');
-
     self.getWikiString = function () {
         if (this.currentLocation().wikiInfo) {
-            if (app.Model.getWikiStatus() == 'down') {
+            if (self.model.getWikiStatus() == 'down') {
                 this.currentLocation().wikiInfo("Wikipedia Unavailable");
             } else if (this.currentLocation().wikiInfo() == '') {
                 this.currentLocation().wikiInfo("No Wikipedia information available");
@@ -37,36 +42,19 @@ ViewModel = function () {
             '<p><em>' + self.getWikiString() + '</em></p>' +
             '</div>';
 
-    }, this);
-
-    //Open the drawer when the menu icon is clicked.
-    var $menu = $('#menu');
-    var $main = $('#map_container');
-    var $drawer = $('.nav');
-
-    //open navigation drawer
-    $menu.click(function (e) {
-        $drawer.toggleClass('open');
-        e.stopPropagation();
-    });
-
-    $main.click(function () {
-        $drawer.removeClass('open');
-    });
-
-    menuClick = function (data, event) {
-        self.showPin(this)
-
-    };
+    }, this)
 
 
     self.showPin = function (loc) {
-        if (self.currentLocation())
+        if (self.currentLocation()) {
             self.pinBounceOff(self.currentLocation().pin);
+            self.currentLocation().pin.setIcon(loc.pinImage);
+        }
         self.currentLocation(loc);
 
         if (!self.infoWindow)
             self.createWindow();
+        self.currentLocation().pin.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
         self.infoWindow.setContent($('#infoWindowContent').html());
         self.pinBounceOn(self.currentLocation().pin);
         self.infoWindow.open(self.currentLocation().pin.map, self.currentLocation().pin);
@@ -78,7 +66,6 @@ ViewModel = function () {
         if (self.infoWindow);
         self.infoWindow.close();
     };
-
 
     self.filterLocations = ko.computed(function () {
         if (!self.filterString()) {
@@ -106,21 +93,50 @@ ViewModel = function () {
 
     self.pinBounceOn = function (pin) {
         pin.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function () {
+            self.pinBounceOff(pin);
+        }, 3000);
     }
     self.pinBounceOff = function (pin) {
         pin.setAnimation(null);
     }
 
     self.createWindow = function () {
-        self.infoWindow = app.map.createInfoWindow(self.currentLocation());
+        self.infoWindow = self.map.createInfoWindow(self.currentLocation());
     }
 
-    window.addEventListener('load', app.map.initMap(self.locations()));
+    //open navigation drawer
+    $menuButton.click(function (e) {
+        $drawer.toggleClass('open');
+        e.stopPropagation();
+    });
 
+    $main.click(function () {
+        $drawer.removeClass('open');
+    });
+
+    menuClick = function (data, event) {
+        $drawer.removeClass('open');
+        self.showPin(this);
+
+    };
+
+    //window.addEventListener('load', self.map.initMap(self.locations()));
+    //  self.map.getPlaces();
+
+    self.googleTimeout = setTimeout(function () {
+        $('#header_status').text("Google Failed To load");
+    }, 5000);
+
+    window.loadMap = function () {
+        self.map.initMap(self.locations());
+        clearTimeout(self.googleTimeout);
+        $('#header_status').text("");
+
+    }
 };
 
-app.Model = new Model();
-app.map = new MapHelper();
+
 app.viewModel = new ViewModel();
 //bind the view to our ViewModel
 ko.applyBindings(app.viewModel);

@@ -3,10 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Neighborhood Map</title>
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 601px)" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen and (max-width: 600px)" href="/css/responsive.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.4.0.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBw0otAMG9zj1FW6rMbQSd74CvV1RE2KJs&callback=loadMap"></script>
     <meta name="viewport" content="width=device-width">
 </head>
 
@@ -14,8 +16,8 @@
     <div id='main'>
         <nav id='menu_container' class="nav">
             <div id='menu_filter'>
-                <p align="center">Location Filter</p>
-                <input id='filter-textbox' type="input" data-bind="textInput: filterString" />
+                <p id="filter_label" align="center">Location Filter</p>
+                <input id='filter_textbox' type="input" data-bind="textInput: filterString" />
             </div>
             <div id='menu_content' data-bind="foreach: filterLocations().sort(function (l, r) { return l.name > r.name ? 1 : -1 })">
                 <div class="menu_item" data-bind="LocItem, click: menuClick">
@@ -25,12 +27,17 @@
         </nav>
         <div id='map_container'>
             <div id='map_header'>
-                <h1>Points of Interest in Dayton</h1>
-                <a id="menu" class="header_menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />
-                    </svg>
-                </a>
+                <div id='menu_button_container'>
+                    <a id='menu_button'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="24 24 24 24">
+                            <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />
+                        </svg>
+                    </a>
+                </div>
+                <div id='title_container'>
+                    <h2 id="header_text">Points of Interest in Dayton</h2>
+                    <h3 id="header_status">Please wait while Google Maps loads</h3>
+                </div>
             </div>
             <div id="info-window-container" style="display:none">
                 <div id="window-content" data-bind="html:contentStr"></div>
