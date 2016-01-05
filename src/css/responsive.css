@@ -53,15 +53,12 @@ body {
     transform: translate(300px, 0);
 }
 
-.header_menu {
-    display: inline-block;
-    position: absolute;
-    left: 0;
+#menu_button_container {
+    -webkit-flex: none;
+    flex: none;
     padding: 5px;
-}
-
-.header_menu svg {
-    width: 36px;
+    height: 100%;
+    width: 40px;
     fill: #E0E0E0;
 }
 
@@ -78,17 +75,6 @@ body {
     color: lightgray;
 }
 
-#menu_filter {
-    height: 5em;
-    margin: 5px;
-}
-
-#filter-textbox {
-    margin: auto;
-    height: 2em;
-    width: 90%;
-}
-
 .menu_item {
     padding: 20px;
 }
@@ -102,18 +88,7 @@ body {
     height: 100%;
 }
 
-#map_header {
-    background-color: lightslategray;
-    height: 10%;
-}
-
 #map_content {
     background-color: lightslategray;
     height: 90%
 }
-
-#infoWindow {}
-
-#markerName {}
-
-#markerLoc {}

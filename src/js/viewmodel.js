@@ -2,7 +2,7 @@ var app = app || {};
 
 ViewModel = function () {
     var self = this;
-    var $menu = $('#menu');
+    var $menuButton = $('#menu_button');
     var $main = $('#map_container');
     var $drawer = $('.nav');
     self.map = new MapHelper();
@@ -106,7 +106,7 @@ ViewModel = function () {
     }
 
     //open navigation drawer
-    $menu.click(function (e) {
+    $menuButton.click(function (e) {
         $drawer.toggleClass('open');
         e.stopPropagation();
     });

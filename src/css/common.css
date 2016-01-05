@@ -72,11 +72,6 @@ body {
     height: 100%;
 }
 
-#map_header {
-    background-color: lightslategray;
-    height: 10%;
-}
-
 #map_content {
     background-color: lightslategray;
     height: 90%;
@@ -85,4 +80,39 @@ body {
 #infoWindowContent {
     max-width=100px;
     background-color: red
+}
+
+#title_container {
+    min-width: 300px;
+    text-align: center;
+    -webkit-flex: 9;
+    flex: 9;
+}
+
+#map_header {
+    display: -webkit-flex;
+    display: flex;
+    background-color: lightslategray;
+    height: 10%;
+}
+
+#menu_filter {
+    height: 5em;
+    margin: 5px;
+}
+
+#filter_textbox {
+    margin: auto;
+    height: 2em;
+    width: 90%;
+}
+
+#menu_container {
+    -webkit-flex: none;
+    flex: none;
+    height: 100%;
+    width: 300px;
+    float: left;
+    background-color: black;
+    color: lightgray;
 }

@@ -4,7 +4,7 @@ Model = function () {
     self.wikiStatus = 'up';
     self.locations = [
         {
-            name: 'National Museum of the U.S. Air Force',
+            name: 'National Museum of the United States Air Force',
             address: '1100 Spaatz St, Wright-Patterson AFB'
     },
         {

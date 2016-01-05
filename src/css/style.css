@@ -1,27 +1,13 @@
 /* null margins and padding to give good cross-browser baseline */
 
-.header_menu {
+#menu_button_container {
     visibility: hidden;
-    display: inline-block;
     position: absolute;
     left: 0;
     padding: 5px;
 }
 
-.header_menu svg {
-    width: 36px;
-    fill: #E0E0E0;
-}
-
 #main {
     height: 100%;
     width: 100%;
-}
-
-#menu_container {
-    height: 100%;
-    width: 300px;
-    float: left;
-    background-color: black;
-    color: lightgray;
 }
