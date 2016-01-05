@@ -8,7 +8,7 @@ MapHelper = function () {
 
     //initialize default map view
     self.initMap = function (locations) {
-        self.map = new google.maps.Map(document.getElementById('map_content'), {
+        self.map = new google.maps.Map(document.getElementById('map_container'), {
             center: {
                 lat: 39.764093,
                 lng: -84.187295

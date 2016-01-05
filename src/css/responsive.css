@@ -1,43 +1,19 @@
-/* null margins and padding to give good cross-browser baseline */
-
-html,
-body,
-address,
-blockquote,
-div,
-form,
-fieldset,
-caption,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-hr,
-ul,
-li,
-ol,
-ul,
-table,
-tr,
-td,
-th,
-p,
-img {
-    margin: 0;
-    padding: 0;
+#menu_container {
+    height: 100%;
+    width: 300px;
+    float: left;
+    background-color: black;
+    color: lightgray;
 }
 
-html,
-body {
-    height: 100%;
+#map_container {
     width: 100%;
+    background-color: black;
 }
 
 .nav {
     z-index: 10;
-    background-color: #fff;
+    background-color: #000;
     width: 300px;
     position: absolute;
     left: -300px;
@@ -54,41 +30,13 @@ body {
 }
 
 #menu_button_container {
-    -webkit-flex: none;
-    flex: none;
     padding: 5px;
     height: 100%;
     width: 40px;
     fill: #E0E0E0;
 }
 
-#main {
-    height: 100%;
-    width: 100%;
-}
-
-#menu_container {
-    height: 100%;
-    width: 300px;
-    float: left;
-    background-color: black;
-    color: lightgray;
-}
-
-.menu_item {
-    padding: 20px;
-}
-
-.selected {
-    background-color: yellow;
-}
-
 #map_container {
-    background-color: darkslategray;
-    height: 100%;
-}
-
-#map_content {
-    background-color: lightslategray;
-    height: 90%
+    position: absolute;
+    left: 0;
 }

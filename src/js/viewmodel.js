@@ -2,9 +2,9 @@ var app = app || {};
 
 ViewModel = function () {
     var self = this;
-    var $menuButton = $('#menu_button');
     var $main = $('#map_container');
-    var $drawer = $('.nav');
+    var $nav = $('#menu_container');
+    var $menuButton = $('#menu_button')
     self.map = new MapHelper();
     self.model = new Model();
     self.infoWindow = '';
@@ -31,7 +31,6 @@ ViewModel = function () {
 
             return this.currentLocation().wikiInfo();
         }
-
     };
 
     self.contentStr = ko.computed(function () {
@@ -107,16 +106,16 @@ ViewModel = function () {
 
     //open navigation drawer
     $menuButton.click(function (e) {
-        $drawer.toggleClass('open');
+        $nav.toggleClass('open');
         e.stopPropagation();
     });
 
     $main.click(function () {
-        $drawer.removeClass('open');
+        $nav.removeClass('open');
     });
 
     menuClick = function (data, event) {
-        $drawer.removeClass('open');
+        $nav.removeClass('open');
         self.showPin(this);
 
     };
