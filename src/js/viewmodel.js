@@ -41,9 +41,9 @@ var ViewModel = function () {
      */
     self.getWikiString = function () {
         if (this.currentLocation().wikiInfo) {
-            if (self.model.getWikiStatus() === 'down') {
+            if (self.model.getWikiStatus().toString() === 'down') {
                 this.currentLocation().wikiInfo("Wikipedia Unavailable");
-            } else if (this.currentLocation().wikiInfo() === '') {
+            } else if (this.currentLocation().wikiInfo().toString() === '') {
                 this.currentLocation().wikiInfo("No Wikipedia information available");
             }
             return this.currentLocation().wikiInfo();
