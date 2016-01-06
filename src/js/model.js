@@ -1,5 +1,5 @@
 var app = app || {};
-Model = function () {
+var Model = function () {
     var self = this;
     self.wikiStatus = 'up';
     self.locations = [
@@ -64,7 +64,7 @@ var LocItem = function (data) {
     self.pin = '';
     self.gCallback = function (results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
-            self.pin = createMarker(results[0], self);
+            createMarker(results[0], self);
         }
     };
     self.wikiStatus = 'down';

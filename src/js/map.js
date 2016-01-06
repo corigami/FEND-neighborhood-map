@@ -1,13 +1,25 @@
-/*global google, app */
+/*global google, LocItem, app */
 var app = app || {};
-MapHelper = function () {
-    var self = this;
+
+/**
+ * @description - helper object for map functions.  Some of the functionality
+ *                was derived from the nanodegree resume project.
+ * @constructor
+ */
+var MapHelper = function () {
+    'use strict';
+    var self = this,
+        i = '',
+        mapLocations = '';
     self.map = '';
     self.service = '';
 
-
-    //initialize default map view
+    /**
+     * @description - initialize default map view
+     * @param {array} locations - array of locations
+     */
     self.initMap = function (locations) {
+        mapLocations = locations;
         self.map = new google.maps.Map(document.getElementById('map_container'), {
             center: {
                 lat: 39.764093,
@@ -16,57 +28,27 @@ MapHelper = function () {
             zoom: 12
         });
 
-
         // Sets the boundaries of the map based on pin locations
         window.mapBounds = new google.maps.LatLngBounds();
         self.service = new google.maps.places.PlacesService(self.map);
 
+        //adds window event listener to the map.  redraws map to fit pins within new size
         google.maps.event.addDomListener(window, 'resize', function () {
             self.map.fitBounds(window.mapBounds);
             self.map.setCenter(window.mapBounds.getCenter());
         });
-        self.placePins(locations);
+        self.placePins();
 
     };
 
-    //for future use
-    self.getPlaces = function () {
-        self.service = new google.maps.places.PlacesService(self.map);
-        self.service.nearbySearch({
-            location: {
-                lat: 39.764093,
-                lng: -84.187295
-            },
-            radius: 10000,
-            types: ['park']
-        }, this.receivePlaces);
-    };
-
-    self.receivePlaces = function (results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (var i = 0; i < results.length; i++) {
-                var item = results[i];
-                //console.log(item.name);
-                self.viewLocations.push(new LocItem({
-                    name: item.name,
-                    address: item.vicinity
-                }))
-            }
-        }
-    };
-
-
-    /*
-    pinPoster(locations) takes in the array of locations created by locationFinder()
-    and fires off Google place searches for each location
-    */
-    self.placePins = function (locations) {
-        // creates a Google place search service object. PlacesService does the work of
-        // actually searching for location data.
-        //      var service = new google.maps.places.PlacesService(map);
-
+    /**
+     * @description - places pins by getting calling the google textSearch service
+     *                with the formatted requests object and callback function
+     * @param {array} locations - array of locations
+     */
+    self.placePins = function () {
         // Iterates through the array of locations, creates a search object for each location
-        locations.forEach(function (place) {
+        mapLocations.forEach(function (place) {
             // the search request object
             var request = {
                 query: place.queryString()
@@ -79,14 +61,12 @@ MapHelper = function () {
         });
     };
 
-
-
-    /*
-    createMapMarker(placeData) reads Google Places search results to create map pins.
-    placeData is the object returned from search results containing information
-    about a single location.
-    */
-    createMarker = function (placeData, locItem) {
+    /**
+     * @description - creates google map marker objects and adds event listeners
+     * @param {object} placeData - data returned from google textSearch
+     * @param {object} locItem - data object that represents locations
+     */
+    window.createMarker = function (placeData, locItem) {
         // The next lines save location data from the search result object to local variables
         var lat = placeData.geometry.location.lat(), // latitude from the place service
             lon = placeData.geometry.location.lng(), // longitude from the place service
@@ -100,12 +80,9 @@ MapHelper = function () {
                 icon: locItem.pinImage
             });
 
+        //adds click event listener to marker
         google.maps.event.addListener(marker, 'click', function () {
             app.viewModel.showPin(locItem);
-
-        });
-        google.maps.event.addListener(self.map, 'click', function () {
-            //  app.viewModel.hidePin();
 
         });
 
@@ -114,13 +91,18 @@ MapHelper = function () {
         bounds.extend(new google.maps.LatLng(lat, lon));
         self.map.fitBounds(bounds); // fit the map to the new marker
         self.map.setCenter(bounds.getCenter()); // center the map
-        return marker;
+        locItem.pin = marker;
     };
 
-    self.createInfoWindow = function (currentLoc) {
+    /**
+     * @description -  creates a info window to be attached to a pin.
+     *                 Only one window should be created according to google
+     *                 best practices.
+     */
+    self.createInfoWindow = function () {
         var window = new google.maps.InfoWindow({
             content: ''
-        })
+        });
         return window;
     };
-}
+};

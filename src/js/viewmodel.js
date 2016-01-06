@@ -1,4 +1,5 @@
-//global application variable
+/*global $, MapHelper, Model, ko, LocItem, google */
+// global application variable
 var app = app || {};
 
 
@@ -78,7 +79,7 @@ var ViewModel = function () {
 
         //create an info window if it doesn't exist yet.
         if (!self.infoWindow) {
-            self.infoWindow = self.map.createInfoWindow(self.currentLocation());
+            self.infoWindow = self.map.createInfoWindow();
         }
         self.currentLocation().pin.setIcon('http://maps.google.com/mapfiles/ms/icons/purple-dot.png');
         self.infoWindow.setContent($('#infoWindowContent').html());
