@@ -2,10 +2,13 @@ frontend-nanodegree-Neighborhood Map
 ===============================
 The Neighborhood Map is simple, responsive design, web application that shows a few points of interest in the Dayton area.
 
+
 Running the application:
+
     -Simply open index.html in a chrome browser to get started.  Other browsers have not been tested    
 
 Features:
+
 •	Google map integration
 
     -Map and location pins are generated from Google maps and will automatically adjust on window resize
