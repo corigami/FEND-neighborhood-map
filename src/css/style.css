@@ -1,7 +1,0 @@
-/* null margins and padding to give good cross-browser baseline */
-
-.menu_button_container {
-    visibility: hidden;
-    position: absolute;
-    left: 0;
-}

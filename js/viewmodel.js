@@ -10,9 +10,9 @@ var app = app || {};
 var ViewModel = function () {
     'use strict';
     var self = this,
-        $main = $('#map_container'),
-        $nav = $('#menu_container'),
-        $menuButton = $('#menu_button_container');
+        $main = $('#map-container'),
+        $nav = $('#menu-container'),
+        $menuButton = $('#menu-button-container');
     self.map = new MapHelper();
     self.model = new Model();
     self.infoWindow = '';
@@ -21,7 +21,7 @@ var ViewModel = function () {
     self.locations = ko.observableArray();
 
     self.googleTimeout = setTimeout(function () {
-        $('#header_status').text("Google Failed To load");
+        $('#header-status').text("Google Failed To load");
     }, 5000);
 
 
@@ -184,7 +184,7 @@ var ViewModel = function () {
     window.loadMap = function () {
         self.map.initMap(self.locations());
         clearTimeout(self.googleTimeout);
-        $('#header_status').text("");
+        $('#header-status').text("");
         console.log("here");
     };
 

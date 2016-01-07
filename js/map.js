@@ -20,7 +20,7 @@ var MapHelper = function () {
      */
     self.initMap = function (locations) {
         mapLocations = locations;
-        self.map = new google.maps.Map(document.getElementById('map_container'), {
+        self.map = new google.maps.Map(document.getElementById('map-container'), {
             center: {
                 lat: 39.764093,
                 lng: -84.187295
