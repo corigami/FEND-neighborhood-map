@@ -12,7 +12,7 @@ var ViewModel = function () {
     var self = this,
         $main = $('#map_container'),
         $nav = $('#menu_container'),
-        $menuButton = $('#menu_button');
+        $menuButton = $('#menu_button_container');
     self.map = new MapHelper();
     self.model = new Model();
     self.infoWindow = '';
@@ -185,6 +185,7 @@ var ViewModel = function () {
         self.map.initMap(self.locations());
         clearTimeout(self.googleTimeout);
         $('#header_status').text("");
+        console.log("here");
     };
 
     /**
@@ -192,7 +193,7 @@ var ViewModel = function () {
      *                (only shown when responsive css is loaded)
      */
     window.onresize = function () {
-        $nav.removeClass('open');
+        //  $nav.removeClass('open');
     };
 };
 

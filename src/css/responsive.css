@@ -1,20 +1,5 @@
-#menu_container {
-    height: 100%;
-    width: 300px;
-    float: left;
-    background-color: black;
-    color: lightgray;
-}
-
-#map_container {
-    width: 100%;
-    background-color: black;
-}
-
 .nav {
-    z-index: 1;
-    background-color: #000;
-    width: 300px;
+    z-index: 10;
     position: absolute;
     left: -300px;
     /* This trasform moves the drawer off canvas. */
@@ -29,16 +14,17 @@
     transform: translate(300px, 0);
 }
 
-#menu_button_container {
-    padding: 5px;
-    height: 100%;
-    width: 40px;
-    fill: #E0E0E0;
+.menu_button {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    padding: 1em;
+    height: 50px;
+    width: 50px;
 }
 
-#map_container {
-    position: relative;
-    float: right;
-    height: 100%;
-    width: 100%;
+.menu_button_container svg {
+    fill: #333;
+    height: 50px;
+    width: 50px;
 }

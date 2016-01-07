@@ -1,24 +1,7 @@
 /* null margins and padding to give good cross-browser baseline */
 
-#menu_button_container {
+.menu_button_container {
     visibility: hidden;
     position: absolute;
     left: 0;
-}
-
-#menu_container {
-    position: relative;
-    float: left;
-    left: 0px;
-    height: 100%;
-    width: 300px;
-    background-color: black;
-    color: lightgray;
-}
-
-#map_container {
-    position: relative;
-    float: right;
-    height: 100%;
-    width: 100%;
 }
