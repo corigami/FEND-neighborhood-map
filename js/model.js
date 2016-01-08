@@ -50,31 +50,21 @@ var Model = function () {
         var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + loc.name + '&format=json&callback=wikiCallback';
         loc.wikiStatus = 'pending';
         loc.wikiInfo('Wikipedia information pending...');
-        self.setWikiTimer();
 
-        $.ajax({
+        var wikiRequest = $.ajax({
             url: wikiUrl,
             dataType: "jsonp",
+            timeout: 3000,
             success: function (response) {
                 self.wikiStatus = 'up';
                 loc.wikiInfo(response[2]);
-                clearTimeout(self.wikiRequestTimeout);
-            },
-            failure: function () {
-                loc.wikiStatus = 'error';
             }
         });
-    };
 
-    /**
-     * @description - sets wikiStatus if response isn't received from wikipedia in 8 sec.
-     */
-    self.setWikiTimer = function () {
-        if (!self.wikiRequestTimeout) {
-            self.wikiRequestTimeout = setTimeout(function () {
-                self.wikiStatus = 'down';
-            }, 8000);
-        }
+        wikiRequest.error(function () {
+            self.wikiStatus = 'error';
+
+        });
     };
 
     /**

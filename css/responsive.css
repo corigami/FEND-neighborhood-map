@@ -6,10 +6,12 @@
     left: 0;
     padding: 32px 0 0 16px;
 }
+
 .menu-button-svg {
     height: 64px;
     width: 64px;
 }
+
 
 /* Navigation */
 
@@ -23,6 +25,7 @@
     /* Optionally, we animate the drawer. */
     transition: transform .5s ease;
 }
+
 .nav.open {
     -webkit-transform: translate(300px, 0);
     transform: translate(300px, 0);

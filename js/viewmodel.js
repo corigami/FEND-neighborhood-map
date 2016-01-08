@@ -41,7 +41,7 @@ var ViewModel = function () {
      */
     self.getWikiString = function () {
         if (this.currentLocation().wikiInfo) {
-            if (self.model.getWikiStatus().toString() === 'down') {
+            if (self.model.getWikiStatus().toString() === 'error') {
                 this.currentLocation().wikiInfo("Wikipedia Unavailable");
             } else if (this.currentLocation().wikiInfo().toString() === '') {
                 this.currentLocation().wikiInfo("No Wikipedia information available");
@@ -185,7 +185,6 @@ var ViewModel = function () {
         self.map.initMap(self.locations());
         clearTimeout(self.googleTimeout);
         $('#header-status').text("");
-        console.log("here");
     };
 
     /**
